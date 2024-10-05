@@ -1,8 +1,10 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 const Home = () => {
+  const email = useSelector((state)=>state.user.value.email)
   return (
-    <div>Home</div>
+    <div>Welcome{email}</div>
   )
 }
 
