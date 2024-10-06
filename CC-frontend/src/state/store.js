@@ -2,15 +2,18 @@ import {configureStore, createSlice} from "@reduxjs/toolkit"
 
 const userSlice = createSlice({
     name:"user",
-    initialState:{
-        value:{ 
+    initialState:{    
+            name:"",
             email:"",
-            
-        }
+            admin:false,
+            token:""
     },
     reducers:{
         login:(state, action)=>{
-            state.value.email=action.payload.email
+            state.name=action.payload.name
+            state.email=action.payload.email
+            state.admin=action.payload.admin
+            state.token=action.payload.token
         }
     }
 })
@@ -22,3 +25,6 @@ export const store = configureStore({
         user:userSlice.reducer
     }
 })
+
+export const selectCurrentUser = (state)=>state.user.name
+export const selectCurrenttoken = (state)=>state.user.token

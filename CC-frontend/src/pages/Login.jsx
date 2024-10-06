@@ -2,20 +2,50 @@ import React, { useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { login } from '../state/store'
+import { loginAuthentication } from '../services/api'
 
 const Login = () => {
-    const email = useRef(null)
+    const userEmail = useRef(null)
+    const userPassword = useRef(null)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const loginHandler=(e)=>{
+    const loginHandler=async(e)=>{
         e.preventDefault()
 
-        const userEmail = email.current.value
+        const email = userEmail.current.value
+        const password = userPassword.current.value
 
-        dispatch(login({email:userEmail}))
-        navigate("/home")
+        await loginAuthentication(email, password)
+        .then((fetchedData)=>{
+            
+            const {message, name, admin, token} = fetchedData.data
+            console.log(fetchedData.data)
+            if(message==="successful")
+                {
+                    localStorage.setItem('token', token);
+                    dispatch(login({
+                    name:name,
+                    email:email,
+                    admin:admin,
+                    token:token
+                }))
+                navigate("/home")
+            }
+            else if(message==="failed")
+            {
+                console.log("password is incorrect")
+            }
+            else
+            {
+                console.log(message)
+            }
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
+
 
     }
   return (
@@ -41,7 +71,7 @@ const Login = () => {
                     type="email"
                     placeholder="Email"
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-transparent hover:ring-2 hover:ring-yellow-300 transition duration-300 focus:ring-yellow-500 focus:ring-opacity-100 focus:border-black"
-                    ref={email}
+                    ref={userEmail}
                     required
                 />
             </div>
@@ -50,7 +80,7 @@ const Login = () => {
                     type="password"
                     placeholder="Password"
                     className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 focus:border-transparent hover:ring-2 hover:ring-yellow-300 transition duration-300 focus:ring-yellow-500 focus:ring-opacity-100 focus:border-black"
-                    
+                    ref={userPassword}
                     required
                 />
             </div>

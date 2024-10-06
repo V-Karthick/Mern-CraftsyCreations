@@ -2,6 +2,10 @@ const express = require("express")
 const router=express.Router()
 const mongoose = require("mongoose")
 
+const jwt = require("jsonwebtoken")
+const verifyToken = require("../middleware/auth");
+
+
 const User=require("../models/userModel")
 
 router.post("/register",async(req, res)=>{
@@ -12,7 +16,7 @@ router.post("/register",async(req, res)=>{
         if(check)
         {
              res.json({
-                message:"the user already exist"
+                message:"failed"
             })
         }
         else
@@ -24,7 +28,7 @@ router.post("/register",async(req, res)=>{
                 admin:false
             })
              res.json({
-                message:"User have been added successfully"
+                message:"successful"
             })
         }
        
@@ -41,8 +45,12 @@ router.post("/login", async(req, res)=>{
         {
             if(user.password === password)
             {
+                const authToken = jwt.sign({userId: user._id},process.env.JWT_SECRET,{expiresIn:"1h"})
                 res.json({
-                    message:"successful"
+                    message:"successful",
+                    name:user.name,
+                    admin:user.admin,
+                    token:authToken
                 })
             }
             else
@@ -55,13 +63,33 @@ router.post("/login", async(req, res)=>{
         else
         {
             res.json({
-                error:"no user exist"
+                message:"no user exist"
             })
         }
     } catch (error) {
         console.log(error)
     }
 })
+
+router.get("/profile", verifyToken, async (req, res) => {
+    try {
+        // console.log(req.user.userId)
+        const user = await User.findById(req.user.userId); // Use userId from the token
+        if (user) {
+            res.json({
+                message: "successful",
+                name: user.name,
+                email: user.email,
+                admin: user.admin
+            });
+        } else {
+            res.status(404).json({ message: "User not found" });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Server error" });
+    }
+});
 
 module.exports = router
 
