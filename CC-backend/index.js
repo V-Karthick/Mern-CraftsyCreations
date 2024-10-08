@@ -11,10 +11,12 @@ const db = require("./config")
 const userRoutes = require("./routes/userRoutes")
 const productRoutes = require("./routes/productRoutes")
 const cartRoutes = require("./routes/cartRoutes")
+const orderRoutes = require("./routes/orderRoutes")
 
 app.use("/user",userRoutes)
 app.use("/product",productRoutes)
 app.use("/cart", cartRoutes)
+app.use("/order", orderRoutes)
 
 
 app.use("/test",(req, res)=>{

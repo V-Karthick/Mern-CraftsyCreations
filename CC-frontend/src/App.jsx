@@ -9,6 +9,7 @@ import Cart from "./pages/Cart"
 import WebLayout from "./Layout/WebLayout"
 import ProductDisplay from "./pages/ProductDisplay"
 import UserDetails from "./pages/UserDetails"
+import Orders from "./pages/Orders"
 function App() {
   
   return (
@@ -17,11 +18,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Signin />} />
-          <Route element={<WebLayout />}>
             <Route path="/home" element={<Home />} />
+          <Route element={<WebLayout />}>
             <Route path="/products" element={<ProductDisplay />} />
             <Route path="/cart" element={<Cart/>} />
-            <Route path="/userdetails" element={<UserDetails />}/>
+            
+            <Route path="/orders" element={<Orders/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

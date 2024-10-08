@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ProductCard from '../components/ProductCard';
 import Data from '../assets/Data';
-import { SquareX } from "lucide-react";
+import { SquareX, X } from "lucide-react";
 import { addProducts, addToCart, deleteProducts, getProducts } from '../services/api';
 import { useSelector } from 'react-redux';
 import { isAdmin, selectCurrentEmail } from '../state/store';
@@ -85,56 +85,68 @@ const ProductDisplay = () => {
   };
 
   return (
-    <div className="h-full p-8" style={{ backgroundColor: '#e0d1d6' }}>
-      <div className='flex justify-between items-center'>
-        <div className='h-1 w-1'></div>
-        <h1 className="w-full text-3xl font-bold mb-8 text-[#4d6e4b]">Our Handmade Products</h1>
-        {
-         adminStatus && <button className="h-[50%] w-[30%] text-white font-bold py-2 rounded bg-[#84a682]" onClick={() => setAddProductsPage(true)}>Add Products</button>
-        }
+    <div className="h-full p-8 bg-black overflow-y-auto">
+      {/* Heading and Add Products button (visible only for admin) */}
+      <div className='flex justify-between items-center bg-black mb-5'>
+        <h1 className="text-3xl  mb-8 text-white  font-extralight">PRODUCTS</h1>
+        {adminStatus && (
+          <button className="h-[50%] w-[30%] text-black font-bold py-2 rounded bg-white" onClick={() => setAddProductsPage(true)}>
+            Add Products
+          </button>
+        )}
       </div>
-      <div className="h-[90%] flex flex-wrap justify-center gap-8 overflow-y-auto">
+
+      {/* Product Cards */}
+      <div className="flex flex-wrap justify-center gap-8">
         {products.length > 0 ? products.map(({ _id, productImage, productName, productDesc, productPrice }) => (
-          <div key={_id} className="shadow-md rounded-lg p-6 max-w-xs flex flex-col justify-between group transform transition-all hover:-translate-y-2 bg-[#40583d] hover:bg-[#2d3b2c]">
-          <div>
-            <img src={productImage} alt={productName} className="w-full h-48 object-cover mb-4 rounded" />
-            <h2 className="text-xl font-semibold mb-2 group-hover:text-[#4d6e4b] text-[#84a682]">{productName}</h2>
-            <p className="text-black mb-4 group-hover:text-white">{productDesc}</p>
-          </div>
-          <div className="mt-auto">
-            <span className="text-lg font-bold text-[#84a682] block mb-4 flex flex-col justify-center items-center w-full text-2xl">{productPrice}</span>
-            <button onClick={()=>AddToCart(_id,productImage, productName, productDesc, productPrice)}
-              className="w-full text-white font-bold py-2 rounded bg-[#84a682]" 
-              >
-              {!inCart[_id] ? "ADD TO CART" : "Go To Cart"}
-            </button>
-            {adminStatus && <button onClick={()=>deleteHandler(_id)} className="w-full my-2 text-white font-bold py-2 rounded bg-[#ed3700]"> Delete Product</button>}
-          </div>
-        </div>
-        )) : <p>No products available</p>}
-      </div>
-      {
-        addProductsPage && (
-          <div className='h-screen w-screen absolute top-0 left-0 bg-black/20 flex justify-center items-center z-50'>
-            <div className='h-[60%] w-[40%] border-2 border-black bg-green-900 flex flex-col justify-center items-center rounded-md'>
-              <div className='h-[13%] w-full bg-green-400 flex items-center justify-center'>
-                <div className='h-full w-[80%] flex justify-between items-center'>
-                  <h2 className='text-black text-2xl font-semibold'>Add a product</h2>
-                  <SquareX onClick={() => setAddProductsPage(false)} className='h-8 w-8' />
-                </div>
-              </div>
-              <form onSubmit={productHandler} className='flex flex-col justify-center items-center h-[90%] w-[90%]'>
-                <input className='my-3 bg-gray-200 rounded-sm border-2 h-10 w-[70%] p-2 text-black' type='text' placeholder='Product image' required ref={image} />
-                <input className='my-3 bg-gray-200 rounded-sm border-2 h-10 w-[70%] p-2 text-black' type='text' placeholder='Product Name' required ref={name} />
-                <input className='my-3 bg-gray-200 rounded-sm border-2 h-10 w-[70%] p-2 text-black' type='text' placeholder='Product Description' required ref={desc} />
-                <input className='my-3 bg-gray-200 rounded-sm border-2 h-10 w-[70%] p-2 text-black' type='text' placeholder='Product Price' required ref={price} />
-                <button className='bg-green-400 rounded-sm px-4 py-2' type='submit'>Add</button>
-              </form>
+          <div key={_id} className="shadow-md rounded-lg p-6 max-w-xs flex flex-col justify-between group bg-white transition-transform transform hover:scale-105 hover:shadow-xl">
+            <div>
+              <img src={productImage} alt={productName} className="w-full h-48 object-cover mb-4 rounded" />
+              <h2 className="text-xl font-semibold mb-2 text-black">{productName}</h2>
+              <p className="text-black mb-4 font-extralight">{productDesc}</p>
+            </div>
+            <div className="mt-auto">
+              <span className="text-lg font-bold text-black block mb-4 text-center">{productPrice}</span>
+              <button onClick={() => AddToCart(_id, productImage, productName, productDesc, productPrice)}
+                className="w-full text-white font-bold py-2 rounded bg-black">
+                {!inCart[_id] ? "ADD TO CART" : "Go To Cart"}
+              </button>
+              {adminStatus && (
+                <button onClick={() => deleteHandler(_id)} className="w-full my-2 text-white font-bold py-2 rounded bg-[#ed3700]">
+                  Delete Product
+                </button>
+              )}
             </div>
           </div>
-        )
-      }
+        )) : <p>No products available</p>}
+      </div>
+
+      {/* Add Products Modal */}
+      {addProductsPage && (
+        <div className='h-screen w-screen absolute top-0 left-0 bg-black/20 flex justify-center items-center z-50'>
+          <div className='h-[70%] w-[40%] border-2 border-gray-500 bg-gray-50 flex flex-col justify-center items-center rounded-md'>
+            <div className='h-[13%] w-full bg-black  flex items-center justify-center'>
+              <div className='h-full w-[80%] flex justify-between items-center'>
+                <h2 className='text-white  text-2xl font-semibold'>Add a product</h2>
+                <X onClick={() => setAddProductsPage(false)} className='h-8 w-8  text-white text-sm'/>
+                {/* <SquareX onClick={() => setAddProductsPage(false)} className='h-8 w-8  text-white' /> */}
+              </div>
+            </div>
+
+            {/* Add Product Form */}
+            <form onSubmit={productHandler} className='flex flex-col justify-center items-center h-[90%] w-[90%] gap-4'>
+              <input className='w-[80%] px-4 py-2 border-b-2 focus:outline-none border-black  hover:border-gray-400 ' type='text' placeholder='Product image' required ref={image} />
+              <input className='w-[80%] px-4 py-2 border-b-2 focus:outline-none border-black  hover:border-gray-400 ' type='text' placeholder='Product Name' required ref={name} />
+              <input className='w-[80%] px-4 py-2 border-b-2 focus:outline-none border-black  hover:border-gray-400 ' type='text' placeholder='Product Description' required ref={desc} />
+              <input className='w-[80%] px-4 py-2 border-b-2 focus:outline-none border-black  hover:border-gray-400 ' type='text' placeholder='Product Price' required ref={price} />
+              <button className='bg-black text-white w-[20%] rounded-md px-4 py-2 hover:bg-slate-700' type='submit'>Add</button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
+  
+
   );
 }
 

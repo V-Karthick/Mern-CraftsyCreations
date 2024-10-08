@@ -34,4 +34,12 @@ const removeCartItem = (userEmail, productId)=>{
     return axios.delete(`${api}/cart/delete`,{data:{userEmail, productId}})
 }
 
-export {loginAuthentication, signinAuthentication, addProducts, getProducts, deleteProducts, addToCart, displayCart, removeCartItem}
+const addOrder = (address, phno, pName, pImage, pQuantity, pPrice)=>{
+    return axios.post(`${api}/order/add`,{address, phno, pName, pImage, pQuantity, pPrice})
+}
+
+const getOrder = ()=>{
+    return axios.get(`${api}/order/view`)
+}
+
+export {loginAuthentication, signinAuthentication, addProducts, getProducts, deleteProducts, addToCart, displayCart, removeCartItem, addOrder, getOrder}
