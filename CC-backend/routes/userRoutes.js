@@ -1,6 +1,6 @@
 const express = require("express")
 const router=express.Router()
-const mongoose = require("mongoose")
+
 
 const jwt = require("jsonwebtoken")
 const verifyToken = require("../middleware/auth");
@@ -74,7 +74,7 @@ router.post("/login", async(req, res)=>{
 router.get("/profile", verifyToken, async (req, res) => {
     try {
         // console.log(req.user.userId)
-        const user = await User.findById(req.user.userId); // Use userId from the token
+        const user = await User.findById(req.user.userId); 
         if (user) {
             res.json({
                 message: "successful",

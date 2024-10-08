@@ -5,10 +5,11 @@ const orderModel = require("../models/orderModel");
 
 router.post("/add",async(req, res)=>{
     try {
-        const {address, phno, pName, pImage, pQuantity, pPrice}=req.body;
+        const {email,address, phno, pName, pImage, pQuantity, pPrice}=req.body;
     if(address && pName)
     {
         const addOrder = await Order.create({
+            userEmail:email,
             userAddress:address,
             userPhno:phno,
             productName:pName,
@@ -34,9 +35,12 @@ router.post("/add",async(req, res)=>{
 
 router.get("/view",async(req, res)=>{
     try {
-        const orderedData = await orderModel.find()
+        const userEmail = req.query.userEmail
+        console.log(userEmail)
+        const orderedData = await orderModel.find({userEmail:userEmail})
         if(orderedData)
         {
+            
             res.json(orderedData)
         }
         else

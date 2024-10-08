@@ -5,12 +5,16 @@ import Data from '../assets/Data';
 import { addOrder, displayCart, removeCartItem } from '../services/api';
 import { X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import {useSelector} from "react-redux"
+import { selectCurrentEmail } from '../state/store';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([])
   const [orderPage, setOrderPage] = useState(false)
 
   const [orderProduct, setOrderProduct] = useState({})
+
+  const email = useSelector(selectCurrentEmail)
 
   const address = useRef()
   const phno = useRef()
@@ -55,10 +59,10 @@ const Cart = () => {
         e.preventDefault()
         try {
           console.log(orderProduct)
-          const {data}= await addOrder(address.current.value, phno.current.value, orderProduct.productName, orderProduct.productImage, quantity.current.value, orderProduct.productPrice)
+          const {data}= await addOrder(email,address.current.value, phno.current.value, orderProduct.productName, orderProduct.productImage, quantity.current.value, orderProduct.productPrice)
 
+          console.log(data)
           navigate("/orders")
-          // console.log(data)
         } catch (error) {
           console.log(error)
         }

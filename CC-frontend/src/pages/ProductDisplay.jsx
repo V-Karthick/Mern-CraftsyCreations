@@ -12,8 +12,8 @@ const ProductDisplay = () => {
   const adminStatus = useSelector(isAdmin)
   const [inCart, setInCart] = useState(false)
   // console.log(adminStatus)
-  const [products, setProducts] = useState([]); // Keep it as an array initially
-  const [addProductsPage, setAddProductsPage] = useState(false); // Set default to false
+  const [products, setProducts] = useState([]); 
+  const [addProductsPage, setAddProductsPage] = useState(false); 
 
   const image = useRef(null);
   const name = useRef(null);
@@ -49,7 +49,7 @@ const ProductDisplay = () => {
     try {
       const { data } = await getProducts();
       if (Array.isArray(data)) {
-        setProducts(data); // Set data directly if it's an array
+        setProducts(data); 
       } else {
         console.error("Expected array but got:", data);
       }
@@ -99,7 +99,7 @@ const ProductDisplay = () => {
       {/* Product Cards */}
       <div className="flex flex-wrap justify-center gap-8">
         {products.length > 0 ? products.map(({ _id, productImage, productName, productDesc, productPrice }) => (
-          <div key={_id} className="shadow-md rounded-lg p-6 max-w-xs flex flex-col justify-between group bg-white transition-transform transform hover:scale-105 hover:shadow-xl">
+          <div key={_id} className="shadow-md rounded-lg p-6 max-w-xs flex flex-col justify-between group bg-white transition-transform transform hover:scale-105 hover:shadow-lg hover:shadow-gray-400">
             <div>
               <img src={productImage} alt={productName} className="w-full h-48 object-cover mb-4 rounded" />
               <h2 className="text-xl font-semibold mb-2 text-black">{productName}</h2>

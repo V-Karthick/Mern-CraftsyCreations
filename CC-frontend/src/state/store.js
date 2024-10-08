@@ -4,7 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import { createSlice } from "@reduxjs/toolkit";
 import persistStore from "redux-persist/es/persistStore";
 
-// User slice
+
 const userSlice = createSlice({
   name: "user",
   initialState: {    
@@ -25,16 +25,15 @@ const userSlice = createSlice({
 
 export const { login } = userSlice.actions;
 
-// Persist config
 const persistConfig = {
   key: 'user',
   storage,
 };
 
-// Persisted reducer
+
 const persistedReducer = persistReducer(persistConfig, userSlice.reducer);
 
-// Configure store with middleware to ignore non-serializable checks for redux-persist actions
+
 export const store = configureStore({
   reducer: {
     user: persistedReducer,
@@ -42,16 +41,15 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        // Ignore these action types
+        
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
 });
 
-// Persistor
+
 export const persistor = persistStore(store);
 
-// Selectors
 export const selectCurrentUser = (state) => state.user.name;
 export const selectCurrenttoken = (state) => state.user.token;
 export const selectCurrentEmail = (state) => state.user.email;

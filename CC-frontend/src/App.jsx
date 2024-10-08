@@ -3,12 +3,9 @@ import {BrowserRouter, Route, Routes} from "react-router-dom"
 import Login from "./pages/Login"
 import Signin from "./pages/Signin"
 import Home from "./pages/Home"
-import {Provider} from "react-redux"
-import { store } from "./state/store"
 import Cart from "./pages/Cart"
 import WebLayout from "./Layout/WebLayout"
 import ProductDisplay from "./pages/ProductDisplay"
-import UserDetails from "./pages/UserDetails"
 import Orders from "./pages/Orders"
 function App() {
   
