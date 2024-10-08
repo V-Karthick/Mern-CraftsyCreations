@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { login } from '../state/store'
 import { loginAuthentication } from '../services/api'
 
@@ -58,7 +58,7 @@ const Login = () => {
     <div className=' flex flex-col justify-center items-center'>
     <h2 class="text-2xl text-center text-gray-800 mb-5 font-semibold">
   <span>WELCOME TO</span> <br />
-  <span class="block text-purple-600 italic font-qwitcher text-3xl">Craftsy Creations</span>
+  <span class="block text-gray-600  italic font-qwitcher text-6xl">Craftsy Creations</span>
 </h2>
         <p className='text-wrap text-sm mb-5 font-extralight'><span className='font-semibold'>Log In</span> to discover one-of-a-kind handmade crafts that bring warmth and artistry to your life.</p>
         <form 
@@ -79,7 +79,7 @@ const Login = () => {
                 <input
                     type="email"
                     placeholder="Email"
-                    className="w-full px-4 py-2 border-b-2 focus:outline-none  border-black  hover:border-purple-500  "
+                    className="w-full px-4 py-2 border-b-2 focus:outline-none  border-black  hover:border-gray-400  "
                     ref={userEmail}
                     required
                 />
@@ -89,21 +89,21 @@ const Login = () => {
                 <input
                     type="password"
                     placeholder="Password"
-                    className="w-full px-4 py-2 border-b-2 focus:outline-none border-black  hover:border-purple-500 "
+                    className="w-full px-4 py-2 border-b-2 focus:outline-none border-black  hover:border-gray-400 "
                     ref={userPassword}
                     required
                 />
             </div>
             <button
                 type="submit"
-                className="w-full text-white py-2 rounded-md transition duration-300 bg-black hover:bg-purple-500"
+                className="w-full text-white py-2 rounded-md transition duration-300 bg-black hover:bg-[#4f4d4d]"
                 // style={{ background: 'linear-gradient(to right, #8B4513, #DAA520)', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)' }}
             >
                 Login
             </button>
             
         </form>
-        <p className='text-sm mt-4 font-extralight '>Don't have an account? <span className='font-semibold hover:underline'>Sign Up</span></p>
+        <p className='text-sm mt-4 font-extralight '>Don't have an account? <span className='font-semibold hover:underline'><Link to="/register">Sign Up</Link></span></p>
     </div>
     </div>
     <div className='flex  box-border border-black w-[80%] h-[100%] rounded-3xl items-center justify-center'>

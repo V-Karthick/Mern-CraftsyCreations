@@ -36,12 +36,12 @@ const Orders = () => {
     };
 
     return (
-        <div className="container mx-auto p-6">
-            <h1 className="text-3xl font-semibold mb-6 text-center">Your Orders</h1>
+        <div className="container mx-auto p-6 bg-black h-full">
+            <h1 className="text-3xl font-semibold mb-6 text-center text-white">Your Orders</h1>
             {orders.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {orders.map(({ _id, productImage, productName, productPrice, productQuantity, userAddress, userPhno, updatedAt }) => (
-                        <div key={_id} className="shadow-md rounded-lg p-6 bg-[#f5f5f5]">
+                        <div key={_id} className="shadow-md rounded-lg p-6 bg-white transition-transform transform hover:scale-105 hover:shadow-xl">
                             <div className="w-full h-48 mb-4">
                                 <img
                                     src={productImage}

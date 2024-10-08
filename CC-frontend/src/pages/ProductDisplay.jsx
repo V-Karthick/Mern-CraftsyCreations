@@ -90,7 +90,7 @@ const ProductDisplay = () => {
       <div className='flex justify-between items-center bg-black mb-5'>
         <h1 className="text-3xl  mb-8 text-white  font-extralight">PRODUCTS</h1>
         {adminStatus && (
-          <button className="h-[50%] w-[30%] text-black font-bold py-2 rounded bg-white" onClick={() => setAddProductsPage(true)}>
+          <button className="h-[50%] w-[15%] text-black font-bold py-2 rounded bg-white" onClick={() => setAddProductsPage(true)}>
             Add Products
           </button>
         )}

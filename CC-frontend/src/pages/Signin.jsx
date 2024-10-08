@@ -40,7 +40,7 @@ const Signin = () => {
         <div className=' flex flex-col justify-center items-center'>
         <h2 class="text-2xl text-center text-gray-800 mb-5 font-semibold">
   <span>WELCOME TO</span> <br />
-  <span class="block  text-purple-600 italic font-qwitcher">CRAFTSY CREATION</span>
+  <span class="block  text-gray-600 text-6xl italic font-qwitcher">Craftsy Creations</span>
 </h2>
 
             <p className='text-wrap text-sm mb-5 font-extralight'><span className='font-semibold'>Sign In </span> to explore unique, handcrafted creations made with love and creativity by skilled artisans.</p>
@@ -62,7 +62,7 @@ const Signin = () => {
                     <input
                         type="text"
                         placeholder="Name"
-                        className="w-full px-4 py-2 border-b-2 focus:outline-none  border-black  hover:border-purple-600  "
+                        className="w-full px-4 py-2 border-b-2 focus:outline-none  border-black  hover:border-gray-400  "
                         ref={userName}
                         required
                     />
@@ -72,7 +72,7 @@ const Signin = () => {
                     <input
                         type="email"
                         placeholder="Email"
-                        className="w-full px-4 py-2 border-b-2 focus:outline-none  border-black  hover:border-purple-600  "
+                        className="w-full px-4 py-2 border-b-2 focus:outline-none  border-black  hover:border-gray-400  "
                         ref={userEmail}
                         required
                     />
@@ -82,14 +82,14 @@ const Signin = () => {
                     <input
                         type="password"
                         placeholder="Password"
-                        className="w-full px-4 py-2 border-b-2 focus:outline-none border-black  hover:border-purple-600 "
+                        className="w-full px-4 py-2 border-b-2 focus:outline-none border-black  hover:border-gray-400 "
                         ref={userPassword}
                         required
                     />
                 </div>
                 <button
                     type="submit"
-                    className="w-full text-white py-2 rounded-md transition duration-300 bg-black hover:bg-purple-600"
+                    className="w-full text-white py-2 rounded-md transition duration-300 bg-black hover:bg-[#4f4d4d]"
                     // style={{ background: 'linear-gradient(to right, #8B4513, #DAA520)', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)' }}
                 >
                     Sign In
