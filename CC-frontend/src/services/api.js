@@ -1,5 +1,5 @@
 import axios from "axios"
-const api = "http://localhost:8000"
+const api = "https://mern-craftsycreations-backend.onrender.com"
 
 const loginAuthentication = (email, password) =>{
     return axios.post(`${api}/user/login`,{email, password})
