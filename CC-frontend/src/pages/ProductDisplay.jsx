@@ -1,17 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import ProductCard from '../components/ProductCard';
-import Data from '../assets/Data';
-import { SquareX, X } from "lucide-react";
+import {  X } from "lucide-react";
 import { addProducts, addToCart, deleteProducts, getProducts } from '../services/api';
 import { useSelector } from 'react-redux';
 import { isAdmin, selectCurrentEmail } from '../state/store';
+import toast from 'react-hot-toast';
 
 const ProductDisplay = () => {
 
   const email = useSelector(selectCurrentEmail)
   const adminStatus = useSelector(isAdmin)
   const [inCart, setInCart] = useState(false)
-  // console.log(adminStatus)
+  
   const [products, setProducts] = useState([]); 
   const [addProductsPage, setAddProductsPage] = useState(false); 
 
@@ -21,7 +20,7 @@ const ProductDisplay = () => {
   const price = useRef(null);
 
   const AddToCart = async(id,productImage, productName, productDesc,productPrice)=>{
-    // console.log("hello!!!!!!!!!")
+    
     try {
       const {data}=await addToCart(email, productImage, productName, productDesc, productPrice)
       console.log(data)
@@ -29,6 +28,10 @@ const ProductDisplay = () => {
         ...prevState,
         [id]:true,
       }))
+      toast.success("Added to Cart Successfully",{
+        duration:3000,
+        position:"bottom-right"
+      })
     } catch (error) {
       
       console.log(error)
@@ -53,7 +56,7 @@ const ProductDisplay = () => {
       } else {
         console.error("Expected array but got:", data);
       }
-      // console.log(data);
+     
     } catch (error) {
       console.log(error);
     }
@@ -78,7 +81,7 @@ const ProductDisplay = () => {
       );
       console.log(insert.data);
       setAddProductsPage(false);
-      fetchProduct(); // Refresh the product list after adding
+      fetchProduct(); 
     } catch (error) {
       console.log(error);
     }
@@ -86,7 +89,7 @@ const ProductDisplay = () => {
 
   return (
     <div className="h-full p-8 bg-black overflow-y-auto">
-      {/* Heading and Add Products button (visible only for admin) */}
+      
       <div className='flex justify-between items-center bg-black mb-5'>
         <h1 className="text-3xl  mb-8 text-white  font-extralight">PRODUCTS</h1>
         {adminStatus && (
@@ -96,7 +99,7 @@ const ProductDisplay = () => {
         )}
       </div>
 
-      {/* Product Cards */}
+      
       <div className="flex flex-wrap justify-center gap-8">
         {products.length > 0 ? products.map(({ _id, productImage, productName, productDesc, productPrice }) => (
           <div key={_id} className="shadow-md rounded-lg p-6 max-w-xs flex flex-col justify-between group bg-white transition-transform transform hover:scale-105 hover:shadow-lg hover:shadow-gray-400">
@@ -121,7 +124,7 @@ const ProductDisplay = () => {
         )) : <p>No products available</p>}
       </div>
 
-      {/* Add Products Modal */}
+      
       {addProductsPage && (
         <div className='h-screen w-screen absolute top-0 left-0 bg-black/20 flex justify-center items-center z-50'>
           <div className='h-[70%] w-[40%] border-2 border-gray-500 bg-gray-50 flex flex-col justify-center items-center rounded-md'>
@@ -129,11 +132,11 @@ const ProductDisplay = () => {
               <div className='h-full w-[80%] flex justify-between items-center'>
                 <h2 className='text-white  text-2xl font-semibold'>Add a product</h2>
                 <X onClick={() => setAddProductsPage(false)} className='h-8 w-8  text-white text-sm'/>
-                {/* <SquareX onClick={() => setAddProductsPage(false)} className='h-8 w-8  text-white' /> */}
+                
               </div>
             </div>
 
-            {/* Add Product Form */}
+            
             <form onSubmit={productHandler} className='flex flex-col justify-center items-center h-[90%] w-[90%] gap-4'>
               <input className='w-[80%] px-4 py-2 border-b-2 focus:outline-none border-black  hover:border-gray-400 ' type='text' placeholder='Product image' required ref={image} />
               <input className='w-[80%] px-4 py-2 border-b-2 focus:outline-none border-black  hover:border-gray-400 ' type='text' placeholder='Product Name' required ref={name} />

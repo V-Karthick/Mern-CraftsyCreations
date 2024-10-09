@@ -36,11 +36,10 @@ router.post("/add",async(req, res)=>{
 router.get("/view",async(req, res)=>{
     try {
         const userEmail = req.query.userEmail
-        console.log(userEmail)
+        
         const orderedData = await orderModel.find({userEmail:userEmail})
         if(orderedData)
         {
-            
             res.json(orderedData)
         }
         else

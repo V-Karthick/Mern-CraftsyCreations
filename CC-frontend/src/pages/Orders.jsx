@@ -64,7 +64,7 @@ const Orders = () => {
                             <p className="text-lg text-gray-700">Total: <span className="font-bold"> ₹{total(productQuantity, productPrice)}</span></p>
                             <p className="text-md text-gray-600">Address: {userAddress}</p>
                             <p className="text-md text-gray-600">Phone: {userPhno}</p>
-                            {/* <p className="text-md text-gray-600">Total: ₹{total(productQuantity, productPrice)}</p> */}
+                            
                             <p className="text-md text-gray-600">Order Date: {convertToIndianTime(updatedAt)}</p>
                         </div>
                     ))}

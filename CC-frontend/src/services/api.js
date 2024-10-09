@@ -25,8 +25,8 @@ const addToCart = (email, image, name, desc, price)=>{
     return axios.post(`${api}/cart/add`,{email, image, name, desc, price})
 }
 
-const displayCart = ()=>{
-    return axios.get(`${api}/cart/view`)
+const displayCart = (email)=>{
+    return axios.get(`${api}/cart/view`,{params:{userEmail:email}})
 }
 
 const removeCartItem = (userEmail, productId)=>{

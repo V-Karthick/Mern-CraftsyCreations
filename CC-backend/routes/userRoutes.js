@@ -11,7 +11,7 @@ const User=require("../models/userModel")
 router.post("/register",async(req, res)=>{
     try {
         const {name, email, password} = req.body
-        // const admin=false
+        
         const check = await User.findOne({email:email})
         if(check)
         {
@@ -73,7 +73,7 @@ router.post("/login", async(req, res)=>{
 
 router.get("/profile", verifyToken, async (req, res) => {
     try {
-        // console.log(req.user.userId)
+        
         const user = await User.findById(req.user.userId); 
         if (user) {
             res.json({

@@ -4,7 +4,8 @@ const Cart = require("../models/cartModel")
 
 router.get("/view", async(req, res)=>{
     try {
-        const cartItems= await Cart.find()
+        const userEmail = req.query.userEmail
+        const cartItems= await Cart.find({userEmail:userEmail})
         if(cartItems)
         {
             res.json(cartItems)
@@ -56,7 +57,7 @@ router.post("/add",async(req, res)=>{
 router.delete("/delete",async(req, res)=>{
     try {
         const {userEmail, productId} = req.body
-        // console.log(userEmail, productId)
+        
         const check = await Cart.findOne({userEmail:userEmail, _id:productId})
         if(check)
         {

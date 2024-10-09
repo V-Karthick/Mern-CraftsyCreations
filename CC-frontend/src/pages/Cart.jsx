@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-
-import CartCard from '../components/CartCard';
-import Data from '../assets/Data';
 import { addOrder, displayCart, removeCartItem } from '../services/api';
 import { X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import {useSelector} from "react-redux"
 import { selectCurrentEmail } from '../state/store';
+import toast from 'react-hot-toast';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([])
@@ -24,7 +22,7 @@ const Cart = () => {
 
     const fetchCart= async()=>{
       try {
-        const {data} = await displayCart()
+        const {data} = await displayCart(email)
         if(Array.isArray(data))
           {
           setCartItems(data)
@@ -42,6 +40,10 @@ const Cart = () => {
       try {
         const {data} = await removeCartItem(email, id)
         console.log(data)
+        toast.success("Removed From Cart",{
+          duration:3000,
+          position:"bottom-right"
+        })
         fetchCart()
       } catch (error) {
         console.log(error)
@@ -70,7 +72,7 @@ const Cart = () => {
       const orderClickHandler = async(productName, productImage, productPrice)=>{
         await setOrderProduct({productName, productImage, productPrice})
         setOrderPage(true)
-        // console.log(orderProduct)
+        
       }
       console.log(cartItems)
   return (
@@ -115,11 +117,11 @@ const Cart = () => {
               <div className='h-full w-[80%] flex justify-between items-center'>
                 <h2 className='text-white  text-2xl font-semibold'>Add a product</h2>
                 <X onClick={() => setOrderPage(false)} className='h-8 w-8  text-white text-sm'/>
-                {/* <SquareX onClick={() => setAddProductsPage(false)} className='h-8 w-8  text-white' /> */}
+                
               </div>
             </div>
 
-            {/* Add Product Form */}
+            
             <form onSubmit={orderHandler} className='flex flex-col justify-center items-center h-[90%] w-[90%] gap-4'>
               <input className='w-[80%] px-4 py-2 border-b-2 focus:outline-none border-black  hover:border-gray-400 ' type='text' placeholder='User Address' required ref={address} />
               <input className='w-[80%] px-4 py-2 border-b-2 focus:outline-none border-black  hover:border-gray-400 ' type='text' placeholder='User Phone Number' required ref={phno} />

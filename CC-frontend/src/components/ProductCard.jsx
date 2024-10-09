@@ -10,7 +10,7 @@ const ProductCard = ({ image, title, description, price }) => {
 
     
     const AddToCart = async()=>{
-      // console.log("hello!!!!!!!!!")
+      
       try {
         const {data}=await addToCart(email, image, title, description, price)
         console.log(data)
