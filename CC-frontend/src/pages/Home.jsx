@@ -39,7 +39,7 @@ const Home = () => {
           <p className="text-sm ">At Craftsy Creations, we believe in the timeless beauty of handmade artistry. Our journey began with a shared passion for craftsmanship and a desire to bring unique, one-of-a-kind pieces to life. Every product we create is thoughtfully designed and made with care, ensuring that each item carries its own special story.</p>
           <p className="text-3xl font-semibold">Our Vision</p>
           <p className="text-sm">We envision a world where handcrafted items are valued for their authenticity and soul. Our mission is to connect artisans with those who appreciate the artistry and effort involved in handmade products. By choosing Craftsy Creations, you're not just buying a product – you're supporting creativity, craftsmanship, and sustainable practices.</p>
-          <p className="text-md font-semibold">KARTHICK | HANS ROHIT | RASHWANTH | PRINCILLA | AGALYA  </p>
+          <p className="text-md font-semibold">KARTHICK | HANS ROHIT | RASHWANTH | AGALYA  </p>
         </div>
       </footer>
     </div>
