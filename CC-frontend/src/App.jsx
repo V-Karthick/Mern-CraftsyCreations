@@ -10,7 +10,6 @@ import Orders from "./pages/Orders"
 function App() {
   
   return (
-    
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
