@@ -19,7 +19,6 @@ function App() {
           <Route element={<WebLayout />}>
             <Route path="/products" element={<ProductDisplay />} />
             <Route path="/cart" element={<Cart/>} />
-            
             <Route path="/orders" element={<Orders/>}/>
           </Route>
         </Routes>
