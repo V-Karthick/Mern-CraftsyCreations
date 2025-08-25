@@ -21,23 +21,82 @@ const ProductCard = ({ image, title, description, price }) => {
       }
         
     }
+  // return (
+  //   <div className="shadow-md rounded-lg p-6 max-w-xs flex flex-col justify-between group transform transition-all hover:-translate-y-2 bg-[#40583d] hover:bg-[#2d3b2c]">
+  //     <div>
+  //       <img src={image} alt={title} className="w-full h-48 object-cover mb-4 rounded" />
+  //       <h2 className="text-xl font-semibold mb-2 group-hover:text-[#4d6e4b] text-[#84a682]">{title}</h2>
+  //       <p className="text-black mb-4 group-hover:text-white">{description}</p>
+  //     </div>
+  //     <div className="mt-auto">
+  //       <span className="text-lg font-bold text-[#84a682] block mb-4 flex flex-col justify-center items-center w-full text-2xl">{price}</span>
+  //       <button onClick={AddToCart}
+  //         className="w-full text-white font-bold py-2 rounded bg-[#84a682]" 
+  //         >
+  //         {!inCart ? "ADD TO CART" : "Go To Cart"}
+  //       </button>
+  //       <button className="w-full my-2 text-white font-bold py-2 rounded bg-[#ed3700]"> Delete Product</button>
+  //     </div>
+  //   </div>
+  // );
   return (
-    <div className="shadow-md rounded-lg p-6 max-w-xs flex flex-col justify-between group transform transition-all hover:-translate-y-2 bg-[#40583d] hover:bg-[#2d3b2c]">
+    <motion.div
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.98 }}
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      className="shadow-lg rounded-2xl p-6 max-w-xs flex flex-col justify-between group 
+                 transform transition-all bg-gradient-to-b from-[#3a4d35] to-[#1f2a1b] 
+                 hover:shadow-2xl"
+    >
       <div>
-        <img src={image} alt={title} className="w-full h-48 object-cover mb-4 rounded" />
-        <h2 className="text-xl font-semibold mb-2 group-hover:text-[#4d6e4b] text-[#84a682]">{title}</h2>
-        <p className="text-black mb-4 group-hover:text-white">{description}</p>
+        <div className="overflow-hidden rounded-lg mb-4">
+          <motion.img
+            src={image}
+            alt={title}
+            className="w-full h-48 object-cover rounded-lg"
+            whileHover={{ scale: 1.1 }}
+            transition={{ duration: 0.4 }}
+          />
+        </div>
+        <h2 className="text-xl font-bold mb-2 text-[#cce2cc] group-hover:text-[#9ad89a] transition-colors">
+          {title}
+        </h2>
+        <p className="text-gray-300 mb-4 leading-relaxed group-hover:text-white transition-colors">
+          {description}
+        </p>
       </div>
+
       <div className="mt-auto">
-        <span className="text-lg font-bold text-[#84a682] block mb-4 flex flex-col justify-center items-center w-full text-2xl">{price}</span>
-        <button onClick={AddToCart}
-          className="w-full text-white font-bold py-2 rounded bg-[#84a682]" 
-          >
-          {!inCart ? "ADD TO CART" : "Go To Cart"}
-        </button>
-        <button className="w-full my-2 text-white font-bold py-2 rounded bg-[#ed3700]"> Delete Product</button>
+        <span className="block text-2xl font-extrabold text-[#9ad89a] mb-4 text-center tracking-wide">
+          {price}
+        </span>
+
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={AddToCart}
+          className="w-full text-white font-semibold py-3 rounded-xl 
+                     bg-gradient-to-r from-[#84a682] to-[#4d6e4b] 
+                     hover:shadow-lg hover:from-[#9ad89a] hover:to-[#5e8f5d] 
+                     transition-all duration-300"
+        >
+          {!inCart ? "ADD  CART" : "Go To Cart"}
+        </motion.button>
+
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="w-full mt-3 text-white font-semibold py-3 rounded-xl 
+                     bg-gradient-to-r from-[#ed3700] to-[#b62b00] 
+                     hover:shadow-lg hover:from-[#ff4c1a] hover:to-[#d63400] 
+                     transition-all duration-300"
+        >
+          Delete Product
+        </motion.button>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
